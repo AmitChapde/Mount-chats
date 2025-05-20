@@ -1,0 +1,25 @@
+That's absolutely correct! You've got the core idea of secure password handling during registration and login. Let's break down the process a bit more formally:
+
+Registration:
+
+The user provides their desired password in plain text.
+Before saving the user to the database, the plain text password is hashed using a library like bcrypt. This process is one-way, meaning it's computationally very difficult (practically infeasible) to get the original plain text password back from the hash.
+The hashed password is then stored in the database for that user. The original plain text password is discarded and never stored.
+Login:
+
+The user provides their login credentials, including their plain text password.
+The system retrieves the user's record from the database based on their username or email. This record contains the hashed password that was stored during registration.
+The isPasswordMatch method (which internally uses bcrypt.compare()) takes two arguments:
+The plain text password entered by the user during login.
+The hashed password retrieved from the database for that user (this.password).
+bcrypt.compare() securely compares these two. It doesn't just do a string comparison. Instead, it hashes the entered plain text password using the same algorithm and salt that were used to create the stored hash and then compares the resulting hashes.
+The isPasswordMatch method returns true if the plain text password, when hashed, matches the stored hash, and false otherwise.
+Based on this boolean result, the system either authenticates the user (if true) or rejects the login attempt (if false).
+You've accurately described the standard and secure way of handling passwords in user authentication. Let me know if you have any more questions!
+
+
+.methods and .statics on usersCHEMA 
+
+Model Instance: This refers to a specific, individual document that you've retrieved from the database or created in memory based on your Mongoose model. In the context of your User schema, a model instance would be a single user object with its own properties (like name, email, password, etc.). When you fetch a user from the database using something like UserModel.findById(), the result is a model instance. Inside a methods function, this refers to this specific model instance.
+
+Model: This refers to the UserModel itself (the constructor function created by mongoose.model('User', userSchema)). You use the model to interact with the entire collection of user documents in your database. You call statics directly on this UserModel.

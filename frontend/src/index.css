@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+}
+
+.placeholder-style {
+  @apply p-2 placeholder-graybase w-full text-sm rounded border  border-quill   focus:outline-none focus:ring-2 focus:ring-jet;
+}
