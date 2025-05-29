@@ -45,7 +45,7 @@ function LoginPage() {
         const token = response.data.token;
         localStorage.setItem("token", token);
         enqueueSnackbar("Logged in successfully", { variant: "success" });
-        navigate("/HomePage");
+        navigate("/home");
       }
     } catch (error) {
       console.log("An error occured", error);

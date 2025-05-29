@@ -33,9 +33,14 @@ router.get("/login", (req, res) => {
 });
 
 router.get("/logout", (req, res) => {
-  req.logout(() => {
-    res.redirect("/"); //clear session and go to homepage
-  });
+  req.logout(err=>{
+    if(err) return next(err);
+
+    req.session.destroy(()=>{
+      res.clearCookie('connect.sid');
+      res.redirect("http://localhost:5173")
+    })
+  })
 });
 
 module.exports = router;
