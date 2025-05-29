@@ -66,7 +66,7 @@ function RegisterPage() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/v1/auth/register",
+        "http://localhost:5000/api/v1/auth/register",
         registerFormData
       );
       if (response.status === 201) {
@@ -91,6 +91,9 @@ function RegisterPage() {
     }
   };
 
+  const handleGoogleSignIn = () => {
+    window.location.href = "http://localhost:5000/auth/google";
+  };
   return (
     <>
       <div className="flex flex-col justify-center p-1 md:p-4 md:flex-row-reverse  xl:p-4 xl:flex-row-reverse overflow-x-hidden max-w-full text-center ">
@@ -217,7 +220,10 @@ function RegisterPage() {
             </div>
           </div>
           <div className="flex flex-row justify-center mb-4">
-            <button className="flex items-center justify-center gap-2 border border-gray-300 rounded px-4 py-2 w-full text-sm hover:bg-gray-100 transition md:w-1/2 xl:w-1/2">
+            <button
+              className="flex items-center justify-center gap-2 border border-gray-300 rounded px-4 py-2 w-full text-sm hover:bg-gray-100 transition md:w-1/2 xl:w-1/2"
+              onClick={handleGoogleSignIn}
+            >
               <img
                 src="https://www.svgrepo.com/show/475656/google-color.svg"
                 alt="Google"
@@ -230,11 +236,10 @@ function RegisterPage() {
           <div className="flex flex-col gap-1  justify-between items-center">
             <p>
               Already have an account ?
-              <Link to="/">
-                <span className="underline text-tuatara  hover:text-gray-900 transition cursor-pointer">
-                  Sign In
-                </span>
-              </Link>
+              <Link to='/'><span className="underline text-tuatara  hover:text-gray-900 transition cursor-pointer">
+                Sign In
+              </span></Link>
+              
             </p>
 
             <p>© 2025 MountC. All rights reserved.</p>

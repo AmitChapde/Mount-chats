@@ -10,7 +10,9 @@ const userSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: true,
+      required: function () {
+        return !this.googleId;
+      },
       trim: true,
       unique: true,
       lowercase: true,
@@ -21,12 +23,10 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
       trim: true,
-      lowercase:true,
       minLength: 8,
       validate(value) {
-        if(!value) return;
+        if (!value) return;
         if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
           throw new Error(
             "Password must contain at least one letter and one number"

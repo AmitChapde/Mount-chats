@@ -36,7 +36,7 @@ function LoginPage() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/v1/auth/login",
+        "http://localhost:5000/api/v1/auth/login",
         formData
       );
       if (response.status === 200) {
@@ -81,6 +81,11 @@ function LoginPage() {
     }
     return isValid;
   };
+
+  const handleGoogleSignUp=()=>{
+    console.log("Google SignIn clicked");
+    window.location.href = "http://localhost:5000/auth/google";
+  }
 
   return (
     <>
@@ -178,7 +183,7 @@ function LoginPage() {
             </div>
           </div>
           <div className="flex flex-row justify-center mb-4">
-            <button className="flex items-center justify-center gap-2 border border-gray-300 rounded px-4 py-2 w-full text-sm hover:bg-gray-100 transition md:w-1/2 xl:w-1/2">
+            <button type='button' className="flex items-center justify-center gap-2 border border-gray-300 rounded px-4 py-2 w-full text-sm hover:bg-gray-100 transition md:w-1/2 xl:w-1/2" onClick={handleGoogleSignUp}>
               <img
                 src="https://www.svgrepo.com/show/475656/google-color.svg"
                 alt="Google"
